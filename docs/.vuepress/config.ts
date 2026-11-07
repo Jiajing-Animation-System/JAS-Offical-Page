@@ -18,12 +18,12 @@ export default defineUserConfig({
   lang: 'zh-CN',
   locales: {
     '/': {
-      title: 'Jiajing Animation System 嘉靖动画公社',
+      title: '嘉靖动画公社',
       lang: 'zh-CN',
       description: '历喵 嘉靖动画公社官方网站',
     },
     '/en/': {
-      title: 'Jiajing Animation System 嘉靖动画公社',
+      title: 'Jiajing Animation System',
       lang: 'en-US',
       description: '历喵 嘉靖动画公社官方网站',
     },

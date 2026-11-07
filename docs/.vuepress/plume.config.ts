@@ -12,6 +12,7 @@
 
 import { defineThemeConfig } from 'vuepress-theme-plume'
 import { enCollections, zhCollections } from './collections'
+import { iconGithub } from './icons'
 import { enNavbar, zhNavbar } from './navbar'
 
 /**
@@ -21,7 +22,7 @@ export default defineThemeConfig({
   logo: 'https://theme-plume.vuejs.press/plume.png',
 
   social: [
-    { icon: 'github', link: '/' },
+    { icon: { svg: iconGithub, name: 'github' }, link: 'https://github.com/Jiajing-Animation-System' },
   ],
 
   locales: {

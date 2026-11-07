@@ -1,7 +1,7 @@
 ---
 pageLayout: home
 config:
-  - type: banner
+  - type: MemberBanner
     full: true
     # 背景大图：放在 .vuepress/public/ 下，替换同名文件即可换图
     banner: /images/banner.svg
@@ -16,8 +16,11 @@ config:
       text: 以动画连接美好，做历喵圈动画团队的领先者！
       actions:
         - theme: brand
-          text: 进入博客
+          text: 加入我们
           link: /blog/
+        - theme: alt
+          text: 查看作品
+          link: /demo/
         - theme: alt
           text: 了解我们
           link: /demo/

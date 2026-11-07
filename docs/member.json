@@ -1,0 +1,24 @@
+{
+    "member1": {
+        "name":"青瑶",
+        "avator": "./assets/imgs/ava/sz.png",
+        "description": "嘉靖动画公社社长",
+        "tags": "社长,动画,剧情脚本",
+        "socials": {
+            "rednote": "https://www.xiaohongshu.com/user/profile/66b60736000000001d022cff?xsec_token=ABzSXg9WaZi22H0nzI1jr4iB4ZK1cE8nRdply0c1jH-f4=&xsec_source=pc_search"
+        }
+    },
+    "member2":{
+        "name":"嘉靖_block",
+        "avator": "./assets/imgs/ava/jjblock.png",
+        "description":"副社长",
+        "tags":"技术员,宣传,动画",
+        "socials":{
+            "rednote":"https://www.xiaohongshu.com/user/profile/62f65b60000000001e01f122"
+        }
+
+    }
+
+    
+   
+}
