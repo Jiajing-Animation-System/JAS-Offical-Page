@@ -17,6 +17,16 @@
             "rednote":"https://www.xiaohongshu.com/user/profile/62f65b60000000001e01f122"
         }
 
+    },
+    "member3":{
+        "name":"豆花不是豆腐",
+        "avator":"./assets/imgs/ava/dhzyw.png",
+        "description":"特效师",
+        "tags": "特效师",
+        "socials":{
+            "rednote":"https://www.xiaohongshu.com/user/profile/612b3f9f0000000001001697?channel_type=web_search_result_notes&parent_page_channel_type=web_user_board&xsec_token=ABO6g8VNIy3YrK8sCsfEBpci5XSbWodbs5KLznTAE0b04=&xsec_source=pc_user"
+        }
+        
     }
 
     

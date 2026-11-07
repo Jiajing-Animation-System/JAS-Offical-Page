@@ -17,7 +17,7 @@ config:
       actions:
         - theme: brand
           text: 加入我们
-          link: /blog/
+          link: /blog/joinus
         - theme: alt
           text: 查看作品
           link: /demo/

@@ -25,9 +25,23 @@ interface Member {
   socials: SocialLink
 }
 
-const members = computed<Member[]>(() =>
-  Object.values(memberData as Record<string, Member>),
-)
+/**
+ * 成员列表
+ *
+ * 对每条数据做容错处理：字段缺失时给出安全默认值，
+ * 避免个别成员数据不完整（如缺少 socials / tags）时影响整体渲染。
+ */
+const members = computed<Member[]>(() => {
+  const source = (memberData ?? {}) as Record<string, Partial<Member>>
+
+  return Object.values(source).map((raw, index) => ({
+    name: raw?.name ?? `成员 ${index + 1}`,
+    avator: raw?.avator ?? '',
+    description: raw?.description ?? '',
+    tags: raw?.tags ?? '',
+    socials: raw?.socials ?? {},
+  }))
+})
 
 /** 社交平台 key 别名 → 图标表中的标准 key */
 const socialAliases: Record<string, string> = {
@@ -52,6 +66,13 @@ function resolveAvatar(path: string): string {
   return withBase(path.replace(/^\.\//, ''))
 }
 
+/** 头像加载失败时隐藏破图标，露出占位底色 */
+function handleAvatarError(event: Event): void {
+  const el = event.target as HTMLImageElement | null
+  if (el)
+    el.style.visibility = 'hidden'
+}
+
 /** 拆分 tags 字段（逗号分隔） */
 function resolveTags(tags: string): string[] {
   if (!tags) return []
@@ -72,11 +93,14 @@ function resolveTags(tags: string): string[] {
     <div class="member-grid">
       <div v-for="(member, index) in members" :key="index" class="member-card">
         <img
+          v-if="member.avator"
           class="member-avatar"
           :src="resolveAvatar(member.avator)"
           :alt="member.name"
           loading="lazy"
+          @error="handleAvatarError"
         >
+        <div v-else class="member-avatar member-avatar-empty" aria-hidden />
 
         <div class="member-body">
           <div class="member-info">
@@ -184,6 +208,11 @@ function resolveTags(tags: string): string[] {
   border-radius: 50%;
   background-color: rgb(255 255 245 / 0.1);
   border: 1px solid rgb(255 255 245 / 0.16);
+}
+
+/* 无头像时的占位圆 */
+.member-avatar-empty {
+  display: block;
 }
 
 .member-body {
