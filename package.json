@@ -6,10 +6,10 @@
   "author": "Chenghao_lee <2215127992@qq.com>",
   "license": "MIT",
   "scripts": {
-    "docs:build": "vuepress build docs --clean-cache --clean-temp",
+    "docs:build": "vuepress build docs --dest .vuepress/dist --clean-cache --clean-temp",
     "docs:dev": "vuepress dev docs",
     "docs:dev-clean": "vuepress dev docs --clean-cache --clean-temp",
-    "docs:preview": "http-server docs/.vuepress/dist",
+    "docs:preview": "http-server .vuepress/dist",
     "vp-update": "npx vp-update"
   },
   "devDependencies": {
