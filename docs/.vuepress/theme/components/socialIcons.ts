@@ -25,6 +25,7 @@ export const socialNames: Record<string, string> = {
   xhs: '小红书',
   bilibili: '哔哩哔哩',
   bili: '哔哩哔哩',
+  bilbili: '哔哩哔哩',
   zhihu: '知乎',
   qq: 'QQ',
   telegram: 'Telegram',

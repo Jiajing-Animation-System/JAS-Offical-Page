@@ -2,7 +2,7 @@ import { defineClientConfig } from 'vuepress/client'
 import MemberBanner from './theme/components/MemberBanner.vue'
 import MemberList from './theme/components/MemberList.vue'
 
-// import './theme/styles/custom.css' // import your custom styles / 导入自定义样式
+import './theme/styles/custom.css' // import your custom styles / 导入自定义样式
 
 export default defineClientConfig({
   enhance({ app }) {

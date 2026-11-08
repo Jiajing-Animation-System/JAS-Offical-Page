@@ -26,6 +26,74 @@
   */
 }
 
+/**
+ * 顶栏半透明毛玻璃效果
+ *
+ * 原理：主题顶栏背景由 `--vp-nav-bg-color` 变量控制（默认为实心 `--vp-c-bg`），
+ * 这里改为半透明色 + `backdrop-filter: blur()`，使下方内容透出并产生磨砂质感。
+ *
+ * 说明：
+ * 1. 顶栏位于 `.vp-nav`（fixed 定位），需保证其层级高于页面内容，
+ *    否则 backdrop-filter 会取到错误的背景；
+ * 2. `backdrop-filter` 需要 `-webkit-` 前缀以兼容 Safari；
+ * 3. 部分浏览器不支持 backdrop-filter 时，背景退化为半透明纯色，仍可正常使用。
+ */
+
+:root {
+  /* 顶栏背景色改为半透明（浅色模式） */
+  --vp-nav-bg-color: rgb(255 255 255 / 0.72);
+}
+
+[data-theme="dark"] {
+  /* 顶栏背景色改为半透明（深色模式） */
+  --vp-nav-bg-color: rgb(28 28 30 / 0.72);
+}
+
+/* 顶栏容器：承载毛玻璃效果 */
+.vp-navbar {
+  background-color: var(--vp-nav-bg-color);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+}
+
+/*
+ * 主题实际给 `.content-body`（顶栏右侧内容区）设置了背景色，
+ * 它会覆盖 `.vp-navbar` 上的效果，这里同步处理才能保证整条顶栏都是毛玻璃。
+ */
+.vp-navbar:not(.home.top) .content-body {
+  background-color: var(--vp-nav-bg-color);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+}
+
+/* 标题区（左侧 logo 区域）同样需要毛玻璃背景 */
+.vp-navbar.has-sidebar .title {
+  background-color: var(--vp-nav-bg-color);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+}
+
+/*
+ * 主题在部分断点下会把顶栏背景设为 transparent（让首页 banner 大图透出），
+ * 这里覆盖为半透明毛玻璃，使顶栏在首页与内页保持一致的质感。
+ */
+@media (min-width: 960px) {
+  .vp-navbar:not(.home) {
+    background-color: var(--vp-nav-bg-color);
+  }
+
+  .vp-navbar:not(.has-sidebar, .home.top) {
+    background-color: var(--vp-nav-bg-color);
+  }
+}
+
+/* 移动端展开菜单时同样保持毛玻璃 */
+.vp-navbar.screen-open {
+  background-color: var(--vp-nav-bg-color);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+}
+
 /** Dark Mode / 深色模式 */
 
 [data-theme="dark"] {

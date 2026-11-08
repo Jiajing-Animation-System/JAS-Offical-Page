@@ -43,20 +43,75 @@ const members = computed<Member[]>(() => {
   }))
 })
 
-/** 社交平台 key 别名 → 图标表中的标准 key */
+/**
+ * 社交平台 key 别名 → 图标表中的标准 key
+ *
+ * member.json 中 `socials` 的 key 可用平台的常见别名书写，
+ * 这里统一归一化后再去图标表查找。
+ */
 const socialAliases: Record<string, string> = {
+  // 小红书
   rednote: 'xiaohongshu',
   xhs: 'xiaohongshu',
   xiaohongshu: 'xiaohongshu',
+  // 哔哩哔哩
+  bilibili: 'bilibili',
   bili: 'bilibili',
+  bilbili: 'bilibili',
+  b站: 'bilibili',
+  // 其他
   twitter: 'twitter',
   x: 'twitter',
+  zhihu: 'zhihu',
+  qq: 'qq',
+  telegram: 'telegram',
+  github: 'github',
 }
 
-/** 取平台图标，不存在则返回 undefined（退化为文字展示） */
-function resolveSocialIcon(platform: string): string | undefined {
-  const key = socialAliases[platform] ?? platform
-  return socialIcons[key]
+/**
+ * URL 域名特征 → 图标表中的标准 key
+ *
+ * 作为兜底：当 socials 的 key 写法不在别名表中时，
+ * 尝试从链接域名反推平台，保证图标仍能正确显示。
+ */
+const socialUrlPatterns: { pattern: RegExp, key: string }[] = [
+  { pattern: /bilibili\.com|b23\.tv/i, key: 'bilibili' },
+  { pattern: /xiaohongshu\.com|xhslink/i, key: 'xiaohongshu' },
+  { pattern: /github\.com/i, key: 'github' },
+  { pattern: /zhihu\.com/i, key: 'zhihu' },
+  { pattern: /qq\.com/i, key: 'qq' },
+  { pattern: /t\.me|telegram/i, key: 'telegram' },
+  { pattern: /twitter\.com|x\.com/i, key: 'twitter' },
+]
+
+/**
+ * 归一化平台 key：别名 → 标准 key
+ *
+ * 优先按 key 别名表匹配；未命中时尝试从 URL 域名反推，
+ * 保证 key 写法不统一时仍能展示正确图标与平台名。
+ */
+function resolveSocialKey(platform: string, url = ''): string {
+  const key = platform?.toLowerCase() ?? ''
+  if (socialAliases[key])
+    return socialAliases[key]
+
+  const matched = socialUrlPatterns.find(item => item.pattern.test(url))
+  return matched ? matched.key : key
+}
+
+/**
+ * 取平台图标
+ *
+ * 优先按 key 匹配（支持别名），其次按 URL 域名反推，
+ * 都不匹配则返回 undefined，调用方退化为文字展示。
+ */
+function resolveSocialIcon(platform: string, url = ''): string | undefined {
+  const key = resolveSocialKey(platform)
+  if (key && socialIcons[key])
+    return socialIcons[key]
+
+  const matched = socialUrlPatterns.find(item => item.pattern.test(url))
+  return matched ? socialIcons[matched.key] : undefined
 }
 
 /** 头像路径：json 中为相对路径（./assets/...），需补全为站点绝对路径 */
@@ -124,16 +179,16 @@ function resolveTags(tags: string): string[] {
               :key="platform"
               class="member-social"
               :href="url"
-              :title="socialNames[platform] || platform"
-              :aria-label="socialNames[platform] || platform"
+              :title="socialNames[platform] || socialNames[resolveSocialKey(platform, url)] || platform"
+              :aria-label="socialNames[platform] || socialNames[resolveSocialKey(platform, url)] || platform"
               target="_blank"
               rel="noopener"
             >
               <span
-                v-if="resolveSocialIcon(platform)"
+                v-if="resolveSocialIcon(platform, url)"
                 class="vp-icon is-svg"
                 aria-hidden
-                v-html="resolveSocialIcon(platform)"
+                v-html="resolveSocialIcon(platform, url)"
               />
               <span v-else class="member-social-text">{{ platform }}</span>
             </a>
