@@ -24,5 +24,7 @@ config:
         - theme: alt
           text: 了解我们
           link: /demo/
+  # 横幅下方的社团简介区块，正文读取 .vuepress/aboutus.txt
+  - type: AboutUs
 title: 首页
 ---

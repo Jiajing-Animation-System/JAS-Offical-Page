@@ -8,21 +8,17 @@
  */
 
 import { defineNavbarConfig } from 'vuepress-theme-plume'
-import { iconArchive, iconBlog, iconFile, iconHome, iconNote, iconTag } from './icons'
+import { iconArchive, iconBlog, iconFile, iconHome, iconInfo, iconNote, iconTag, iconUsers, iconWorks } from './icons'
 
 export const zhNavbar = defineNavbarConfig([
 
   { text: '首页', link: '/', icon: { svg: iconHome } },
+  { text: '所有成员', link: '/members/', icon: { svg: iconUsers } },
+  // 暂不跳转：仅保留入口展示，点击行为由 custom.css 禁用
+  { text: '查看作品', link: '/#soon-works', activeMatch: '/__never__', icon: { svg: iconWorks } },
   { text: '博客', link: '/blog/', icon: { svg: iconBlog } },
-  { text: '标签', link: '/blog/tags/', icon: { svg: iconTag } },
-  { text: '归档', link: '/blog/archives/', icon: { svg: iconArchive } },
-  {
-    text: '笔记',
-    icon: { svg: iconNote },
-    items: [
-      { text: '示例', link: '/demo/README.md', icon: { svg: iconFile } },
-    ]
-  },
+  // 暂不跳转：仅保留入口展示，点击行为由 custom.css 禁用
+  { text: '了解我们', link: '/#soon-about', activeMatch: '/__never__', icon: { svg: iconInfo } },
 ])
 
 export const enNavbar = defineNavbarConfig([

@@ -117,3 +117,18 @@
   --vp-c-text-3: rgba(235, 235, 245, 0.38);
   */
 }
+
+/**
+ * 暂未开放的导航项（查看作品 / 了解我们）
+ *
+ * 这两个入口先保留在导航栏中展示，但不触发路由跳转。
+ * 通过禁用指针事件实现，无需 javascript: 协议或额外脚本；
+ * 后续开放时，只需在 navbar.ts 中换成真实链接并删除对应选择器。
+ */
+.vp-navbar-menu a[href$="#soon-works"],
+.vp-navbar-menu a[href$="#soon-about"],
+.vp-nav-screen-menu a[href$="#soon-works"],
+.vp-nav-screen-menu a[href$="#soon-about"] {
+  pointer-events: none;
+  cursor: default;
+}
