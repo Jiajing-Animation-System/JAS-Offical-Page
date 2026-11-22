@@ -4,6 +4,8 @@
  *
  * 位于「了解我们」区块下方。当前展示第一个作品《十年》的制作进度。
  */
+import { RouteLink } from 'vuepress/client'
+
 // 首页区块由 VPHome 统一下发这些属性，声明后避免它们落到根元素上
 defineProps<{
   full?: boolean
@@ -34,7 +36,8 @@ const steps = [
         <span class="rule" aria-hidden="true" />
       </div>
 
-      <article class="work-card">
+      <!-- 整张卡片可点击：跳到 docs/blog/catalog-1/article-1.md（permalink: /blog/q1vz53kt/） -->
+      <RouteLink class="work-card" to="/blog/q1vz53kt/">
         <span class="status">
           <span class="status-dot" aria-hidden="true" />
           制作中 MAKING
@@ -59,7 +62,7 @@ const steps = [
             <span class="step-label">{{ step.label }}</span>
           </li>
         </ol>
-      </article>
+      </RouteLink>
     </div>
   </section>
 </template>
@@ -104,11 +107,22 @@ const steps = [
 }
 
 .work-card {
+  display: block;
   margin-top: 2rem;
   padding: 2rem 2.5rem 2.75rem;
   border: 1px solid var(--vp-c-divider);
   border-radius: 12px;
   background-color: var(--vp-c-bg-soft);
+  color: inherit;
+  text-decoration: none;
+  transition:
+    border-color var(--vp-t-color),
+    transform var(--vp-t-color);
+}
+
+.work-card:hover {
+  border-color: var(--vp-c-brand-1);
+  transform: translateY(-2px);
 }
 
 .status {
