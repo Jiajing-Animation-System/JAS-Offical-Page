@@ -24,18 +24,30 @@ export default defineThemeConfig({
   /**
    * 页脚
    *
-   * message：站点声明（含 Netlify 链接）
-   * copyright：版权信息，最后一行是红色的《如果历史是一群喵》版权声明
-   *
-   * 注意：message 会覆盖主题默认的 Powered by 声明，此处保留原声明并追加一行说明。
+   * message：完整页脚内容（左侧四行站点信息 + 右侧友情链接）
+   * copyright：留空，避免主题再渲染一行
    *
    * @see https://theme-plume.vuejs.press/config/theme/#footer
    */
   footer: {
-    message:
-      'Powered by <a href="https://v2.vuepress.vuejs.org/" target="_blank" rel="noopener">VuePress</a> &amp; <a href="https://theme-plume.vuejs.press" target="_blank" rel="noopener">vuepress-theme-plume</a><br>本网站由 <a href="https://github.com/Jiajing-Animation-System" target="_blank" rel="noopener">嘉靖Block</a> 创建并维护，托管在 <a href="https://www.netlify.com/" target="_blank" rel="noopener">netlify</a> 上',
-    copyright:
-      'Copyright © 2026 嘉靖动画公社<br><span style="color: #e53935;">《如果历史是一群喵》的版权归<strong>深圳市萌想文化传播有限公司</strong>所有，本站按照《中华人民共和国著作权法》的相关规定建设</span>',
+    message: `
+<div class="footer-grid">
+  <div class="footer-text">
+    <div>Powered by <a href="https://v2.vuepress.vuejs.org/" target="_blank" rel="noopener">VuePress</a> &amp; <a href="https://theme-plume.vuejs.press" target="_blank" rel="noopener">vuepress-theme-plume</a></div>
+    <div>本网站由 <a href="https://github.com/Jiajing-Animation-System" target="_blank" rel="noopener">嘉靖Block</a> 创建并维护，托管在 <a href="https://www.netlify.com/" target="_blank" rel="noopener">netlify</a> 上</div>
+    <div>Copyright © 2026 嘉靖动画公社</div>
+    <div style="color: #e53935;">《如果历史是一群喵》的版权归<strong>深圳市萌想文化传播有限公司</strong>所有，本站按照《中华人民共和国著作权法》的相关规定建设</div>
+  </div>
+  <div class="footer-links">
+    <div class="footer-links-title">友情链接</div>
+    <div class="footer-links-grid">
+      <a href="https://classis.land" target="_blank" rel="noopener">ClassIsland 课程表</a>
+      <a href="https://sectl.cn" target="_blank" rel="noopener">思拓创联</a>
+      <a href="https://github.com/Jiajing-Animation-System/Firefly-Music-Player" target="_blank" rel="noopener">Firefly Music</a>
+    </div>
+  </div>
+</div>`,
+    copyright: '',
   },
 
   social: [

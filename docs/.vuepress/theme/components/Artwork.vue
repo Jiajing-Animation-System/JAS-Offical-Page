@@ -2,9 +2,10 @@
 /**
  * 首页「查看作品 / OURS ARTWORK」区块
  *
- * 位于「了解我们」区块下方。当前展示第一个作品《十年》的制作进度。
+ * 位于「了解我们」区块下方。卡片上的标题、副标题、当前阶段都从 docs/making.json 读取。
  */
 import { RouteLink } from 'vuepress/client'
+import makingData from '../../../making.json'
 
 // 首页区块由 VPHome 统一下发这些属性，声明后避免它们落到根元素上
 defineProps<{
@@ -13,14 +14,14 @@ defineProps<{
   onlyOnce?: boolean
 }>()
 
-/** 制作流程节点，active 为当前所处阶段 */
-const steps = [
-  { label: '立项', active: true },
-  { label: '规划', active: false },
-  { label: '制作', active: false },
-  { label: '完成', active: false },
-  { label: '发布', active: false },
-]
+/** 制作中作品数据：title 标题 / tags 副标题 / states 当前阶段 / info 详情页源文件 */
+const making = makingData.makingartwork
+
+/** 阶段名称，索引与 making.json 的 states 对应：0=立项 1=规划 2=制作 3=完成 4=发布 */
+const stepLabels = ['立项', '规划', '制作', '完成', '发布']
+
+/** 当前阶段索引，限制在合法范围内 */
+const currentStep = Math.min(stepLabels.length - 1, Math.max(0, Number(making.states) || 0))
 </script>
 
 <template>
@@ -36,30 +37,33 @@ const steps = [
         <span class="rule" aria-hidden="true" />
       </div>
 
-      <!-- 整张卡片可点击：跳到 docs/blog/catalog-1/article-1.md（permalink: /blog/q1vz53kt/） -->
+      <!-- 整张卡片可点击：跳到 docs/blog/ArtworksInfo/article-1.md（permalink: /blog/q1vz53kt/） -->
       <RouteLink class="work-card" to="/blog/q1vz53kt/">
-        <span class="status">
-          <span class="status-dot" aria-hidden="true" />
-          制作中 MAKING
-        </span>
+        <div class="card-head">
+          <span class="status">
+            <span class="status-dot" aria-hidden="true" />
+            制作中 MAKING
+          </span>
+          <span class="hint">点击卡片查看详情页面</span>
+        </div>
 
         <h3 class="work-title">
-          《十年》
+          {{ making.title }}
         </h3>
         <p class="work-subtitle">
-          同人动画·同人OP
+          {{ making.tags }}
         </p>
 
         <ol class="progress" aria-label="制作进度">
           <li
-            v-for="step in steps"
-            :key="step.label"
+            v-for="(label, index) in stepLabels"
+            :key="label"
             class="step"
-            :class="{ active: step.active }"
-            :aria-current="step.active ? 'step' : undefined"
+            :class="{ active: index === currentStep }"
+            :aria-current="index === currentStep ? 'step' : undefined"
           >
             <span class="step-dot" aria-hidden="true" />
-            <span class="step-label">{{ step.label }}</span>
+            <span class="step-label">{{ label }}</span>
           </li>
         </ol>
       </RouteLink>
@@ -123,6 +127,19 @@ const steps = [
 .work-card:hover {
   border-color: var(--vp-c-brand-1);
   transform: translateY(-2px);
+}
+
+.card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+}
+
+.hint {
+  font-size: 12px;
+  color: var(--vp-c-text-3);
 }
 
 .status {

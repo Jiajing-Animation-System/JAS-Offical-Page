@@ -26,7 +26,9 @@ config:
           link: /#about-us
   # 横幅下方的社团简介区块，正文读取 .vuepress/aboutus.txt
   - type: AboutUs
-  # 了解我们下方的作品展示区块，暂时显示「暂无」
+  # 了解我们下方的作品展示区块
   - type: Artwork
+  # 查看作品下方的招贤纳士区块，跳转到 /blog/n4yb11ch/
+  - type: JoinUs
 title: 首页
 ---

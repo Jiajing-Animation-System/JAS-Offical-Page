@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a1620" />
+      <stop offset="45%" stop-color="#123543" />
+      <stop offset="100%" stop-color="#1b5166" />
+    </linearGradient>
+    <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#8cccd5" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#8cccd5" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glow2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#5086a1" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#5086a1" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="cel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8cccd5" stop-opacity="0.16" />
+      <stop offset="100%" stop-color="#8cccd5" stop-opacity="0.02" />
+    </linearGradient>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="60" />
+    </filter>
+    <filter id="softer" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="120" />
+    </filter>
+    <pattern id="dots" width="46" height="46" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.4" fill="#cfeef2" fill-opacity="0.16" />
+    </pattern>
+  </defs>
+
+  <!-- 背景底色 -->
+  <rect width="1920" height="1080" fill="url(#bg)" />
+
+  <!-- 光晕 -->
+  <circle cx="1520" cy="180" r="460" fill="url(#glow1)" filter="url(#softer)" />
+  <circle cx="250" cy="940" r="420" fill="url(#glow2)" filter="url(#softer)" />
+  <circle cx="1080" cy="620" r="300" fill="url(#glow1)" filter="url(#soft)" opacity="0.55" />
+
+  <!-- 赛璐珞层（动画胶片质感） -->
+  <path d="M0 760 C 320 700, 560 840, 880 800 C 1200 760, 1480 660, 1920 720 L 1920 1080 L 0 1080 Z" fill="url(#cel)" />
+  <path d="M0 860 C 380 820, 700 940, 1060 900 C 1420 860, 1660 800, 1920 840 L 1920 1080 L 0 1080 Z" fill="#8cccd5" fill-opacity="0.05" />
+
+  <!-- 粒子纹理 -->
+  <rect width="1920" height="1080" fill="url(#dots)" />
+
+  <!-- 右上角装饰圆环 -->
+  <g fill="none" stroke="#8cccd5" stroke-opacity="0.3">
+    <circle cx="1660" cy="250" r="120" stroke-width="1.5" />
+    <circle cx="1660" cy="250" r="190" stroke-width="1" stroke-opacity="0.18" />
+    <circle cx="1660" cy="250" r="270" stroke-width="1" stroke-opacity="0.1" />
+  </g>
+
+  <!-- 左下角装饰方块 -->
+  <g fill="#8cccd5" fill-opacity="0.12">
+    <rect x="120" y="880" width="56" height="56" rx="6" />
+    <rect x="192" y="880" width="56" height="56" rx="6" fill-opacity="0.07" />
+    <rect x="120" y="808" width="56" height="56" rx="6" fill-opacity="0.07" />
+  </g>
+</svg>

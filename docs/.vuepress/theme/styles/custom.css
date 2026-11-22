@@ -118,3 +118,44 @@
   */
 }
 
+/**
+ * 页脚重排
+ *
+ * 左侧为站点信息（多行左对齐），右侧为友情链接区。
+ * 友情链接用 grid 竖向填充：每列 2 个，超出后向右新增列。
+ */
+.vp-footer .container {
+  text-align: left;
+}
+
+.footer-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem 2rem;
+}
+
+.footer-text > div + div {
+  margin-top: 0.35rem;
+}
+
+.footer-links-title {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+}
+
+.footer-links-grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(2, auto);
+  gap: 0.35rem 1.5rem;
+}
+
+@media (max-width: 719px) {
+  .footer-grid {
+    justify-content: flex-start;
+  }
+}
+
