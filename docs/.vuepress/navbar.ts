@@ -14,11 +14,11 @@ export const zhNavbar = defineNavbarConfig([
 
   { text: '首页', link: '/', icon: { svg: iconHome } },
   { text: '所有成员', link: '/members/', icon: { svg: iconUsers } },
-  // 暂不跳转：仅保留入口展示，点击行为由 custom.css 禁用
-  { text: '查看作品', link: '/#soon-works', activeMatch: '/__never__', icon: { svg: iconWorks } },
+  // 跳转到首页的「查看作品」区块（Artwork.vue 中 id="our-artwork"）
+  { text: '查看作品', link: '/#our-artwork', icon: { svg: iconWorks } },
   { text: '博客', link: '/blog/', icon: { svg: iconBlog } },
-  // 暂不跳转：仅保留入口展示，点击行为由 custom.css 禁用
-  { text: '了解我们', link: '/#soon-about', activeMatch: '/__never__', icon: { svg: iconInfo } },
+  // 跳转到首页的「了解我们」区块（AboutUs.vue 中 id="about-us"）
+  { text: '了解我们', link: '/#about-us', icon: { svg: iconInfo } },
 ])
 
 export const enNavbar = defineNavbarConfig([

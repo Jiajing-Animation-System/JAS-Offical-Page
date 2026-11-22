@@ -23,8 +23,10 @@ config:
           link: /demo/
         - theme: alt
           text: 了解我们
-          link: /demo/
+          link: /#about-us
   # 横幅下方的社团简介区块，正文读取 .vuepress/aboutus.txt
   - type: AboutUs
+  # 了解我们下方的作品展示区块，暂时显示「暂无」
+  - type: Artwork
 title: 首页
 ---
