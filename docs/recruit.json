@@ -1,0 +1,22 @@
+{
+    "recruitlist":{
+        "recruititem": {
+            "title": "歌词撰写",
+            "description": "撰写同人op的歌词内容，可以使用ai进行创作",
+            "states":"1",
+            "max_people":"2",
+            "current_people":"1",
+            "urgent":"false",
+            "need_computer":"false"
+        },
+        "recruititem2": {
+            "title": "动画师",
+            "description": "制作同人op的动画内容，最终剪辑",
+            "states":"1",
+            "max_people":"2",
+            "current_people":"1",
+            "urgent":"true",
+            "need_computer":"true"
+        }
+    }
+}
